@@ -51,6 +51,7 @@ func NewTimer(d time.Duration) *Timer {
 		t.state = stateExpired
 		t.c <- time.Now()
 	}
+	t.LastTime = d
 	return t
 }
 
