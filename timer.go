@@ -15,6 +15,7 @@ const (
 // A Timer must be created with NewTimer or AfterFunc.
 type Timer struct {
 	C         <-chan time.Time
+	LastTime  time.Duration
 	c         chan time.Time
 	duration  time.Duration
 	state     State
@@ -66,6 +67,7 @@ func (t *Timer) Pause() bool {
 	t.state = stateIdle
 	dur := time.Since(t.startedAt)
 	t.duration = t.duration - dur
+	t.LastTime = t.duration
 	return true
 }
 
